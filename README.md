@@ -7,10 +7,12 @@
       2.执行train.py,生成model并保存。（保存地址：'./save/embeddings/best'）  
 ### 二、生成http接口，接收前台发送数据，返回首次匹配的数据  
     操作步骤：  
-      1.执行Api_http.py（该程序执行以下操作）  
-        (1)生成http接口。接收内容：post方式，json数据，{"txt":"客户问话原文"，"listData":"首次匹配结果list"}，返回内容：  
-        json数据，{"listData":"二次匹配结果list"}。  
-        （2）接收首次匹配服务组件发送json数据，解析json，将内容按规定格式写入到"./data_http.tsv"中。  
+      1.将问题库放置在根目录下，命名为'知识库.xlsx'。  
+      2.执行Api_http2.py（该程序执行以下操作）  
+        (1)生成http接口。  
+        接收内容：post方式，json数据，{"text":"客户问话原文"，"no":"问题编号"}，  
+        返回内容：json数据，{"listData":"匹配结果list"}。  
+        （2）接收首次匹配服务组件发送json数据，解析json，将问题内容进行首次匹配。  
         （3）读取"./data_http.tsv"文档，使用model进行语义相似度计算。  
         （4）计算结果进行排序，截取前4名  
         （5）序列化成json数据并返回。
